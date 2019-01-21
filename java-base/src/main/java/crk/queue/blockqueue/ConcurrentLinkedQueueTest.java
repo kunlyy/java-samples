@@ -1,4 +1,4 @@
-package crk.thread.blockqueue;
+package crk.queue.blockqueue;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

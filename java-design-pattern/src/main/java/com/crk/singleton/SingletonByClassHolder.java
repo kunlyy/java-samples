@@ -1,4 +1,4 @@
-package com.crk.sigleton;
+package com.crk.singleton;
 
 /**
  * 通过类实例的初始化实现单例模式，线程安全

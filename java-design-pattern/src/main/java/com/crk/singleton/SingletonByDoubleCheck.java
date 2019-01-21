@@ -1,4 +1,4 @@
-package com.crk.sigleton;
+package com.crk.singleton;
 
 /**
  * 双层检查模式的单例。线程安全

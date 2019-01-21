@@ -1,4 +1,4 @@
-package crk.thread.blockqueue;
+package crk.queue.blockqueue;
 
 import java.util.ArrayList;
 import java.util.List;
