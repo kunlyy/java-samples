@@ -3,7 +3,7 @@ package crk.thread;
 public class SynchronizedDemo2 implements Runnable {
 
 	private int index;
-	
+
 	public int getIndex() {
 		return index;
 	}
@@ -16,10 +16,11 @@ public class SynchronizedDemo2 implements Runnable {
 		this.index = index;
 	}
 
+	@Override
 	public void run() {
-		if(index == 1){
+		if (index == 1) {
 			Test1();
-		}else {
+		} else {
 			Test2();
 		}
 
@@ -28,7 +29,7 @@ public class SynchronizedDemo2 implements Runnable {
 	private void Test1() {
 		System.out.println("Thread a");
 		synchronized (SynchronizedDemo2.class) {
-			for(int i=0;i<90000000;i++){
+			for (int i = 0; i < 90000000; i++) {
 				i++;
 			}
 			for (int i = 0; i < 5; i++) {
@@ -37,7 +38,7 @@ public class SynchronizedDemo2 implements Runnable {
 			}
 		}
 	}
-	
+
 	private void Test2() {
 		System.out.println("Thread b");
 		synchronized (SynchronizedDemo2.class) {
