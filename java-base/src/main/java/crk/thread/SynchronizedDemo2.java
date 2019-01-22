@@ -29,9 +29,6 @@ public class SynchronizedDemo2 implements Runnable {
 	private void Test1() {
 		System.out.println("Thread a");
 		synchronized (SynchronizedDemo2.class) {
-			for (int i = 0; i < 90000000; i++) {
-				i++;
-			}
 			for (int i = 0; i < 5; i++) {
 				System.out.println(Thread.currentThread().getName()
 						+ " synchronized loop test1 " + i);

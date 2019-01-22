@@ -13,17 +13,12 @@ public class RaceCondition {
 	
 	public static void main(String[] args) throws InterruptedException {
 		final RaceCondition rc = new RaceCondition();
-		new Thread(new Runnable(){
-			
-			@Override
-			public void run() {
-				while(!rc.flag){
-					doSomething();
-					//System.out.println("runnable");
-				}
-			}
-			
-		}).start();
+		new Thread(() -> {
+            while(!rc.flag){
+                doSomething();
+                //System.out.println("runnable");
+            }
+        }).start();
 		
 		Thread.sleep(20);
         rc.flag = true;
