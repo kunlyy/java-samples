@@ -11,6 +11,7 @@
     <modules>
         <module>java-base</module>
         <module>java-design-pattern</module>
+        <module>thrift-demo</module>
     </modules>
 
     <dependencies>
