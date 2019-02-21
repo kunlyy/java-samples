@@ -1,4 +1,4 @@
-package com.crk.service;
+package com.crk.thrift.service;
 
 import com.facebook.swift.service.ThriftMethod;
 import com.facebook.swift.service.ThriftService;

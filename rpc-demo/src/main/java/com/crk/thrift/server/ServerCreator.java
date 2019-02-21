@@ -1,6 +1,6 @@
-package com.crk.server;
+package com.crk.thrift.server;
 
-import com.crk.service.impl.HelloServiceImpl;
+import com.crk.thrift.service.impl.HelloServiceImpl;
 import com.facebook.nifty.core.NettyServerConfig;
 import com.facebook.nifty.core.ThriftServerDef;
 import com.facebook.swift.codec.ThriftCodecManager;

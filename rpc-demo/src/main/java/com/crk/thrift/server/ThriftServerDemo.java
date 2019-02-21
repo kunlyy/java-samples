@@ -1,4 +1,4 @@
-package com.crk.server;
+package com.crk.thrift.server;
 
 import com.facebook.swift.service.ThriftServer;
 

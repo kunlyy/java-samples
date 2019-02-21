@@ -1,6 +1,6 @@
-package com.crk.service.impl;
+package com.crk.thrift.service.impl;
 
-import com.crk.service.HelloService;
+import com.crk.thrift.service.HelloService;
 import org.apache.thrift.TException;
 
 /**
