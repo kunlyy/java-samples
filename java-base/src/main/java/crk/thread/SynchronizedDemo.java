@@ -2,79 +2,77 @@ package crk.thread;
 
 public class SynchronizedDemo {
 
-    public static void main(String[] args) {
-        Thread t1 = new Thread(new Foo(1));
-        Thread t2 = new Thread(new Foo(2));
-        Thread t3 = new Thread(new Foo(3));
-        t1.start();
-        t2.start();
-        t3.start();
-    }
-
+	public static void main(String[] args) {
+		Counter counter = new Counter();
+		Thread thread1 = new Thread(counter, "A");
+		Thread thread2 = new Thread(counter, "B");
+		Thread thread3 = new Thread(counter, "C");
+		thread1.start();
+		thread2.start();
+		thread3.start();
+	}
 }
 
 
-class Foo implements Runnable {
+/**
+ * 代码中countAdd是一个synchronized的，printCount是非synchronized的。
+ * 从上面的结果中可以看出一个线程访问一个对象的synchronized代码块时，
+ * 别的线程可以访问该对象的非synchronized代码块而不受阻塞。
+ */
+class Counter implements Runnable {
+	private int count;
 
-    private int index;
+	public Counter() {
+		count = 0;
+	}
 
-    public volatile int total = 0;
+	public void countAdd() {
+		synchronized (this) {
+			for (int i = 0; i < 5; i++) {
+				try {
+					System.out.println(Thread.currentThread().getName() + ":" + (count++));
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
-    public Foo(int i) {
-        this.index = i;
-    }
+	//非synchronized代码块，未对count进行读写操作，所以可以不用synchronized
+	public void printCount() {
+		synchronized (this) {
+			for (int i = 0; i < 5; i++) {
+				try {
+					System.out.println(Thread.currentThread().getName() + " count:" + (count--));
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
-    @Override
-    public void run() {
-        if (index == 1) {
-            this.Foo1();
-        } else if (index == 2) {
-            this.Foo2();
-        } else {
-            this.Foo3();
-        }
+	public void countSub() {
+		for (int i = 0; i < 5; i++) {
+			try {
+				System.out.println(Thread.currentThread().getName() + " count:" + count);
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    }
-
-    public void Foo1() {
-        System.out.println("Foo1");
-    }
-
-    public void Foo2() {
-        System.out.println("Foo2 start");
-        long start = System.currentTimeMillis();
-        long end = 0L;
-        synchronized (Foo.class) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (total < 10) {
-                int i = total;
-                for (; i <= 10; i++) {
-                    total++;
-                }
-            } else {
-                System.out.println("Foo2==" + total);
-            }
-            end = System.currentTimeMillis();
-            System.out.println("Foo2");
-        }
-        System.out.println(end - start);
-    }
-
-    public void Foo3() {
-        System.err.println("Foo3 start");
-        for (int i = 0; i < 2000000; i++) {
-            i++;
-        }
-        synchronized (Foo.class) {
-            for (int i = 0; i <= 10; i++) {
-                total++;
-            }
-            System.out.println("Foo3==" + total);
-        }
-    }
-
+	@Override
+	public void run() {
+		String threadName = Thread.currentThread().getName();
+		if (threadName.equals("A")) {
+			countAdd();
+		} else if (threadName.equals("B")) {
+			printCount();
+		} else if (threadName.equals("C")) {
+			countSub();
+		}
+	}
 }

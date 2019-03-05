@@ -3,7 +3,7 @@ package crk.thread;
 public class SynchronizedDemo2 implements Runnable {
 
 	private int index;
-	
+
 	public int getIndex() {
 		return index;
 	}
@@ -18,9 +18,9 @@ public class SynchronizedDemo2 implements Runnable {
 
 	@Override
 	public void run() {
-		if(index == 1){
+		if (index == 1) {
 			Test1();
-		}else {
+		} else {
 			Test2();
 		}
 
@@ -41,7 +41,7 @@ public class SynchronizedDemo2 implements Runnable {
 			}
 		}
 	}
-	
+
 	private void Test2() {
 		System.out.println("test2:" + System.currentTimeMillis());
 		System.out.println("Thread b");
