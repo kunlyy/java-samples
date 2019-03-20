@@ -2,6 +2,9 @@ package crk.thread;
 
 /**
  * join()方法会无限等待，它会一直阻塞当前线程，直到目标线程执行完毕
+ *
+ * join()方法使调用该方法的线程在此之前执行完毕，也就是主线程会等待(调用该方法的线程执行完毕后)再往下继续执行.
+ *
  * join()方法会抛出InterruptedException异常
  */
 public class JoinTest implements Runnable {
