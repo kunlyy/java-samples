@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 
 public class ProducerConsumerDemo1 {
 
-	private PriorityQueue<String> queue = new PriorityQueue<String>(10);
+	private PriorityQueue<String> queue = new PriorityQueue<>(10);
 
 	public static void main(String[] args) {
 		ProducerConsumerDemo1 demo1 = new ProducerConsumerDemo1();
@@ -28,7 +28,6 @@ public class ProducerConsumerDemo1 {
 		@Override
 		public void run() {
 			produce();
-
 		}
 
 		private void produce(){
