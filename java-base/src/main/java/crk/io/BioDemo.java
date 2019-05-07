@@ -1,4 +1,4 @@
-package crk.nio;
+package crk.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.net.Socket;
 /**
  * Created by chenrongkun on 2019/3/11.
  */
-public class DemoServer extends Thread {
+public class BioDemo extends Thread {
 	private ServerSocket serverSocket;
 
 	public int getPort() {
@@ -41,7 +41,7 @@ public class DemoServer extends Thread {
 	}
 
 	public static void main(String[] args) throws IOException {
-		DemoServer server = new DemoServer();
+		BioDemo server = new BioDemo();
 		server.start();
 		try (Socket client = new Socket(InetAddress.getLocalHost(), server.getPort())) {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(client.getInputStream()));

@@ -1,4 +1,4 @@
-package crk.nio;
+package crk.io;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -23,9 +23,7 @@ public class ServerDemo {
 		ServerSocket serverSocket = serverSocketChannel.socket();
 		serverSocket.bind(new InetSocketAddress(8080));
 		System.out.println("listening on port 8080");
-
 		this.selector = Selector.open();
-
 		// 绑定channel的accept
 		serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 	}
@@ -35,19 +33,15 @@ public class ServerDemo {
 	}
 
 	private void go() throws Exception {
-
 		// block api
 		while (selector.select() > 0) {
-
 			Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
 			while (iterator.hasNext()) {
 				SelectionKey selectionKey = iterator.next();
 				iterator.remove();
 				// 新连接
 				if (selectionKey.isAcceptable()) {
-					System.out.println("isAcceptable");
 					ServerSocketChannel server = (ServerSocketChannel) selectionKey.channel();
-
 					// 新注册channel
 					SocketChannel socketChannel = server.accept();
 					if (socketChannel == null) {
@@ -67,7 +61,6 @@ public class ServerDemo {
 
 				// 服务端关心的可读，意味着有数据从client传来了，根据不同的需要进行读取，然后返回
 				if (selectionKey.isReadable()) {
-					System.out.println("isReadable");
 					SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
 
 					readBuffer.clear();
